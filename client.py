@@ -12,7 +12,7 @@ if __name__ == "__main__":
     irc.connect((HOST, PORT))
 
     print('Connected')
-    print irc.recv(4096)
+    print(irc.recv(4096))
     print('Received initial data')
 
     print('Sending initial configuration...')
