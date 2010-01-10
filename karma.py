@@ -60,7 +60,7 @@ def list(irc, data):
     channel = data.split()[2]
 
     if len(KARMA) == 0:
-        irc.send('PRIVMSG ' + channel + ' :I don\'t have any karma listings, you should make one.')
+        irc.send('PRIVMSG ' + channel + ' :I don\'t have any karma listings, you should make one.\r\n')
         return
 
     for user in KARMA:

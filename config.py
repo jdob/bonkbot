@@ -3,11 +3,11 @@ HOST = 'localhost'
 PORT = 6667
 
 # Nick and user information the bot should assume
-NICK = 'erwin'
-NAME = 'Erwin Bot'
+NICK = 'claptrap'
+NAME = 'Claptrap Bot'
 
 # Channels to automatically join when logging in
-CHANNELS = '#test,#foo,#bar'
+CHANNELS = '#claptrap'
 
 # Set to True to enable debug messages
 DEBUG = True
@@ -15,4 +15,4 @@ DEBUG = True
 # Plugins --------------------------------
 
 # Karma -----
-KARMA_FILE = '/mnt/jdob/dev/irc/karma.dict'
+KARMA_FILE = './karma.dict'
