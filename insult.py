@@ -30,10 +30,10 @@ def insult(irc, data):
         if len(args) > args.index('insult') + 1:
             channel = args[2]
             user = args[args.index('insult') + 1]
-            insult = randomInsult()
+            insult = __randomInsult()
             irc.send('PRIVMSG ' + channel + ' :' + user + ' - ' + insult + '\r\n')
             
 
-def randomInsult():
+def __randomInsult():
     index = random.randint(0, len(INSULTS) - 1)
     return INSULTS[index]

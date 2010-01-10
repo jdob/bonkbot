@@ -10,21 +10,21 @@ def karma(irc, data):
 
     global loaded
     if not loaded:
-        load(KARMA_FILE)
+        __load(KARMA_FILE)
         loaded = True
 
     if data.find('++') != -1:
-        add(irc, data)
+        __add(irc, data)
 
     if data.find('--') != -1:
-        remove(irc, data)
+        __remove(irc, data)
 
     if data.find('!%s karma' % NICK) != -1:
-        list(irc, data)
+        __list(irc, data)
 
-    save(KARMA_FILE)
+    __save(KARMA_FILE)
 
-def add(irc, data):
+def __add(irc, data):
     channel = data.split()[2]
     for s in data.split():
         index = s.find('++')
@@ -38,9 +38,9 @@ def add(irc, data):
                 KARMA[name] = int(KARMA[name]) + 1
             else:
                 KARMA[name] = 1
-            printKarma(irc, channel, name)
+            __printKarma(irc, channel, name)
 
-def remove(irc, data):
+def __remove(irc, data):
     channel = data.split()[2]
     for s in data.split():
         index = s.find('--')
@@ -54,9 +54,9 @@ def remove(irc, data):
                 KARMA[name] = int(KARMA[name]) - 1
             else:
                 KARMA[name] = -1
-            printKarma(irc, channel, name)
+            __printKarma(irc, channel, name)
 
-def list(irc, data):
+def __list(irc, data):
     channel = data.split()[2]
 
     if len(KARMA) == 0:
@@ -64,14 +64,14 @@ def list(irc, data):
         return
 
     for user in KARMA:
-        printKarma(irc, channel, user)
+        __printKarma(irc, channel, user)
 
-def save(filename):
+def __save(filename):
     file = open(filename, 'wb')
     pickle.dump(KARMA, file)
     file.close()
 
-def load(filename):
+def __load(filename):
     global KARMA
 
     if os.path.exists(KARMA_FILE):
@@ -79,7 +79,7 @@ def load(filename):
         KARMA = pickle.load(file)
         file.close()
 
-def printKarma(irc, channel, user):
+def __printKarma(irc, channel, user):
     if irc is not None:
         irc.send('PRIVMSG ' + channel + ' :' + user + ': ' + str(KARMA[user]) + '\r\n')
 
