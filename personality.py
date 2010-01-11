@@ -23,6 +23,8 @@ INSULTS = (
 'I\'d insult you, but you\'re not bright enough to notice.',
 )
 
+
+
 def insult(irc, data):
     if data.find('!%s insult' % NICK) != -1:
         args = data.split()
@@ -35,7 +37,7 @@ def insult(irc, data):
             if user == NICK:
                 msg(irc, channel, 'Nice try ' + author(data))
             elif user == MAKER:
-                msg(irc, channel, 'I would never insult the maker!'
+                msg(irc, channel, 'I would never insult the maker!')
                 msg(irc, channel, author(data) + ' - ' + __randomInsult())
             else:
                 msg(irc, channel, user + ' - ' + __randomInsult())
