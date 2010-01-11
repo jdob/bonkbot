@@ -16,3 +16,6 @@ DEBUG = True
 
 # Karma -----
 KARMA_FILE = './karma.dict'
+
+# Insult -----
+MAKER = 'jdob'

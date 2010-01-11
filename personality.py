@@ -34,9 +34,11 @@ def insult(irc, data):
 
             if user == NICK:
                 msg(irc, channel, 'Nice try ' + author(data))
+            elif user == MAKER:
+                msg(irc, channel, 'I would never insult the maker!'
+                msg(irc, channel, author(data) + ' - ' + __randomInsult())
             else:
-                insult = __randomInsult()
-                msg(irc, channel, user + ' - ' + insult)
+                msg(irc, channel, user + ' - ' + __randomInsult())
 
 def __randomInsult():
     index = random.randint(0, len(INSULTS) - 1)
