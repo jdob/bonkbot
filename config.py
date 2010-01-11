@@ -3,11 +3,11 @@ HOST = 'localhost'
 PORT = 6667
 
 # Nick and user information the bot should assume
-NICK = 'claptrap'
-NAME = 'Claptrap Bot'
+NICK = 'bonk'
+NAME = 'Bonk Bot'
 
 # Channels to automatically join when logging in
-CHANNELS = '#claptrap'
+CHANNELS = '#bonk'
 
 # Set to True to enable debug messages
 DEBUG = True

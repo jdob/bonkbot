@@ -1,4 +1,5 @@
 from config import *
+from irc_utils import msg
 import pickle
 import os
 
@@ -60,7 +61,7 @@ def __list(irc, data):
     channel = data.split()[2]
 
     if len(KARMA) == 0:
-        irc.send('PRIVMSG ' + channel + ' :I don\'t have any karma listings, you should make one.\r\n')
+        msg(irc, channel, 'I don\'t have any karma listings, you should make one.')
         return
 
     for user in KARMA:
@@ -81,8 +82,7 @@ def __load(filename):
 
 def __printKarma(irc, channel, user):
     if irc is not None:
-        irc.send('PRIVMSG ' + channel + ' :' + user + ': ' + str(KARMA[user]) + '\r\n')
-
+        msg(irc, channel, user + ': ' + str(KARMA[user]))
 
 if __name__ == '__main__':
 

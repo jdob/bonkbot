@@ -1,4 +1,5 @@
 from config import *
+from irc_utils import msg
 import urllib
 
 def quote(irc, data):
@@ -12,7 +13,7 @@ def quote(irc, data):
             price = __lookup(symbol, 'l1')
             change = __lookup(symbol, 'c1')
 
-            irc.send('PRIVMSG ' + channel + ' :' + symbol + ' - Price: $' + price + ', Change: $' + change + '\r\n')
+            msg(irc, channel, symbol + ' - Price: $' + price + ', Change: $' + change)
 
 def __lookup(symbol, f):
     url = 'http://finance.yahoo.com/d/quotes.csv?s=%s&f=%s' % (symbol, f)

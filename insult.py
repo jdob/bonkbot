@@ -1,4 +1,5 @@
 from config import *
+from irc_utils import msg
 import random
 
 INSULTS = (
@@ -30,9 +31,12 @@ def insult(irc, data):
         if len(args) > args.index('insult') + 1:
             channel = args[2]
             user = args[args.index('insult') + 1]
-            insult = __randomInsult()
-            irc.send('PRIVMSG ' + channel + ' :' + user + ' - ' + insult + '\r\n')
-            
+
+            if user == NICK:
+                msg(irc, channel, 'Nice try')
+            else:
+                insult = __randomInsult()
+                msg(irc, channel, user + ' - ' + insult)
 
 def __randomInsult():
     index = random.randint(0, len(INSULTS) - 1)
