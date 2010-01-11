@@ -5,4 +5,12 @@ import quote
 import twitter
 import ops
 
-PLUGINS = (personality.insult, weather.weather, karma.karma, quote.quote, twitter.twitter, ops.give)
+PLUGINS = (
+personality.insult,
+personality.maker,
+weather.weather,
+karma.karma,
+quote.quote,
+twitter.twitter,
+ops.give
+)

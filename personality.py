@@ -23,7 +23,10 @@ INSULTS = (
 'I\'d insult you, but you\'re not bright enough to notice.',
 )
 
-
+MAKER_COMMENTS = (
+'%s rocks.',
+'I would be nothing without %s.'
+)
 
 def insult(irc, data):
     if data.find('!%s insult' % NICK) != -1:
@@ -42,6 +45,16 @@ def insult(irc, data):
             else:
                 msg(irc, channel, user + ' - ' + __randomInsult())
 
+def maker(irc, data):
+    if data.find('!%s maker' % NICK) != -1:
+        args = data.split()
+        channel = args[2]
+        msg(irc, channel, __randomMaker())
+
 def __randomInsult():
     index = random.randint(0, len(INSULTS) - 1)
     return INSULTS[index]
+
+def __randomMaker():
+    index = random.randint(0, len(MAKER_COMMENTS) - 1)
+    return MAKER_COMMENTS[index] % MAKER
