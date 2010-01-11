@@ -5,7 +5,7 @@ import quote
 import twitter
 import ops
 
-PLUGINS = (
+MSG_PLUGINS = (
 personality.insult,
 personality.maker,
 weather.weather,

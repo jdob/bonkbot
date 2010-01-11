@@ -20,7 +20,7 @@ def listen(irc):
             irc.send('PONG ' + data.split()[1] + '\r\n')
         
         # Run all plugins, catching any errors some may throw and logging the crap out of them
-        for p in plugins.PLUGINS:
+        for p in plugins.MSG_PLUGINS:
             try:
                 p(irc, data)
             except:
