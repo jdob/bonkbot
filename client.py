@@ -31,19 +31,21 @@ if __name__ == "__main__":
         if DEBUG and len(data) > 0:
             print(data.rstrip())
 
-        if data.find('PRIVMSG') != -1:
-            for p in plugins.PLUGINS:
-                try:
-                    p(irc, data)
-                except:
-                    print('Error from plugin ' + p.__name__, sys.exc_info()[0])
-                    exceptionType, exceptionValue, exceptionTraceback = sys.exc_info()
-                    traceback.print_exception(exceptionType, exceptionValue, exceptionTraceback, limit=2, file=sys.stdout)
-                    traceback.print_tb(exceptionTraceback, limit=1, file=sys.stdout)
-
+        # Built in functionality rather than a plugin
         if data.find('PING') != -1:
             irc.send('PONG ' + data.split()[1] + '\r\n')
         
+        # Run all plugins, catching any errors some may throw and logging the crap out of them
+        for p in plugins.PLUGINS:
+            try:
+                p(irc, data)
+            except:
+                print('Error from plugin ' + p.__name__, sys.exc_info()[0])
+                exceptionType, exceptionValue, exceptionTraceback = sys.exc_info()
+                traceback.print_exception(exceptionType, exceptionValue, exceptionTraceback, limit=2, file=sys.stdout)
+                traceback.print_tb(exceptionTraceback, limit=1, file=sys.stdout)
+
+        # Let any plugins finish before quitting from command
         if data.find('!%s quit' % NICK) != -1:
             irc.send('QUIT :Fine, I\'ll leave... \r\n')
             sys.exit()

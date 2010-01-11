@@ -1,5 +1,5 @@
 from config import *
-from irc_utils import msg
+from irc_utils import *
 import random
 
 INSULTS = (
@@ -33,7 +33,7 @@ def insult(irc, data):
             user = args[args.index('insult') + 1]
 
             if user == NICK:
-                msg(irc, channel, 'Nice try')
+                msg(irc, channel, 'Nice try ' + author(data))
             else:
                 insult = __randomInsult()
                 msg(irc, channel, user + ' - ' + insult)
