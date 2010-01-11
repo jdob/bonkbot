@@ -24,8 +24,14 @@ INSULTS = (
 )
 
 MAKER_COMMENTS = (
-'%s rocks.',
+'I could never insult the maker %s',
 'I would be nothing without %s.'
+)
+
+COMPLIMENTS = (
+'Wow %s, how incightful.',
+'That\'s a great idea %s, I wish I had thought of that.',
+'That sounds good %s, is there a JIRA for it?'
 )
 
 def insult(irc, data):
@@ -51,6 +57,12 @@ def maker(irc, data):
         channel = args[2]
         msg(irc, channel, __randomMaker())
 
+def compliment(irc, data):
+    if random.randint(0, 1000) == 705:
+        message = __randomCompliment(author(data))
+        channel = data.split()[2]
+        msg(irc, channel, message)
+
 def __randomInsult():
     index = random.randint(0, len(INSULTS) - 1)
     return INSULTS[index]
@@ -58,3 +70,7 @@ def __randomInsult():
 def __randomMaker():
     index = random.randint(0, len(MAKER_COMMENTS) - 1)
     return MAKER_COMMENTS[index] % MAKER
+
+def __randomCompliment(user):
+    index = random.randint(0, len(COMPLIMENTS) -1)
+    return COMPLIMENTS[index] % user
