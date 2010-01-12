@@ -29,6 +29,16 @@ def listen(irc):
                 traceback.print_exception(exceptionType, exceptionValue, exceptionTraceback, limit=2, file=sys.stdout)
                 traceback.print_tb(exceptionTraceback, limit=1, file=sys.stdout)
 
+        # Display plugin help
+        if data.find('!%s help' % NICK) != -1:
+            channel = data.split()[2]
+            msg(irc, channel, 'Greetings traveler. Commands are triggered by typing !, then my name, then the command and any arguments.')
+            for p in plugins.MSG_PLUGINS:
+                if p.__doc__ is not None:
+                    msg(irc, channel, '   ' + p.__doc__)
+
+            msg(irc, channel, 'Thank you for using this bot. We hope no bodily harm comes to you during your usage.')
+
         # Let any plugins finish before quitting from command
         if data.find('!%s quit' % NICK) != -1:
             irc.send('QUIT :Fine, I\'ll leave... \r\n')

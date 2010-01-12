@@ -7,6 +7,8 @@ WEATHER_NS = 'http://xml.weather.yahoo.com/ns/rss/1.0'
 WEATHER_FORMAT = '%s -> Temp: %sF, Condition: %s'
 
 def weather(irc, data):
+    '''weather [zip] - Display weather information for [zip].'''
+
     if data.find('!%s weather' % NICK) != -1:
         args = data.split()
 

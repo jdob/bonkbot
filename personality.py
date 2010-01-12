@@ -25,16 +25,18 @@ INSULTS = (
 
 MAKER_COMMENTS = (
 'I could never insult the maker %s',
-'I would be nothing without %s.'
+'I would be nothing without %s.',
 )
 
 COMPLIMENTS = (
-'Wow %s, how incightful.',
+'Wow %s, how insightful.',
 'That\'s a great idea %s, I wish I had thought of that.',
 'That sounds good %s, is there a JIRA for it?'
 )
 
 def insult(irc, data):
+    '''insult [user] - Send a random insult to [user].'''
+
     if data.find('!%s insult' % NICK) != -1:
         args = data.split()
 
@@ -52,6 +54,8 @@ def insult(irc, data):
                 msg(irc, channel, user + ' - ' + __randomInsult())
 
 def maker(irc, data):
+    '''maker - Speak random praise about the maker.'''
+
     if data.find('!%s maker' % NICK) != -1:
         args = data.split()
         channel = args[2]

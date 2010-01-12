@@ -3,6 +3,8 @@ from irc_utils import msg
 import urllib
 
 def quote(irc, data):
+    '''quote [symbol] - Display information for the stock [symbol].'''
+
     if data.find('!%s quote' % NICK) != -1:
         args = data.split()
 

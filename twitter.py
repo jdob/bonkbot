@@ -3,6 +3,8 @@ from xml.dom import minidom
 import urllib
 
 def twitter(irc, data):
+    '''twitter [user] - Display the last tweet by twitter user [user].'''
+
     if data.find('!%s twitter' % NICK) != -1:
         args = data.split()
 

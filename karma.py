@@ -8,6 +8,7 @@ KARMA = {}
 loaded = False
 
 def karma(irc, data):
+    '''karma - Display all karma data known to the bot.'''
 
     global loaded
     if not loaded:
