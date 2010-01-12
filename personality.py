@@ -48,42 +48,36 @@ def insult(irc, data):
 
         # Make sure a user was selected to be insulted
         if len(args) > args.index('insult') + 1:
-            channel = args[2]
             user = args[args.index('insult') + 1]
 
             if user == NICK:
-                msg(irc, channel, 'Nice try ' + author(data))
+                msg(irc, data, 'Nice try ' + author(data))
             elif user == MAKER:
-                msg(irc, channel, 'I would never insult the maker!')
-                msg(irc, channel, author(data) + ' - ' + __random(INSULTS))
+                msg(irc, data, 'I would never insult the maker!')
+                msg(irc, data, author(data) + ' - ' + __random(INSULTS))
             else:
-                msg(irc, channel, user + ' - ' + __random(INSULTS))
+                msg(irc, data, user + ' - ' + __random(INSULTS))
 
 def maker(irc, data):
     '''maker - Speak random praise about the maker.'''
 
     if data.find('!%s maker' % NICK) != -1:
-        args = data.split()
-        channel = args[2]
-        msg(irc, channel, __randomSub(MAKER_COMMENTS, MAKER))
+        msg(irc, data, __randomSub(MAKER_COMMENTS, MAKER))
 
 def mario(irc, data):
     '''mario - Quotes from the great Super Mario.'''
 
     if data.find('!%s mario' % NICK) != -1:
-        channel = data.split()[2]
-        msg(irc, channel, __random(MARIO))
+        msg(irc, data, __random(MARIO))
 
 def bacon(irc, data):
     if data.find('!%s bacon' % NICK) != -1:
-        channel = data.split()[2]
-        msg(irc, channel, 'BACON!')
+        msg(irc, data, 'BACON!')
 
 def compliment(irc, data):
     if random.randint(0, 1000) == 705:
         message = __randomSub(COMPLIMENTS, author(data))
-        channel = data.split()[2]
-        msg(irc, channel, message)
+        msg(irc, data, message)
 
 def __random(list):
     index = random.randint(0, len(list) - 1)

@@ -27,7 +27,6 @@ def karma(irc, data):
     __save(KARMA_FILE)
 
 def __add(irc, data):
-    channel = data.split()[2]
     for s in data.split():
         index = s.find('++')
         if index > 0:
@@ -40,10 +39,9 @@ def __add(irc, data):
                 KARMA[name] = int(KARMA[name]) + 1
             else:
                 KARMA[name] = 1
-            __printKarma(irc, channel, name)
+            __printKarma(irc, data, name)
 
 def __remove(irc, data):
-    channel = data.split()[2]
     for s in data.split():
         index = s.find('--')
         if index > 0:
@@ -56,17 +54,15 @@ def __remove(irc, data):
                 KARMA[name] = int(KARMA[name]) - 1
             else:
                 KARMA[name] = -1
-            __printKarma(irc, channel, name)
+            __printKarma(irc, data, name)
 
 def __list(irc, data):
-    channel = data.split()[2]
-
     if len(KARMA) == 0:
-        msg(irc, channel, 'I don\'t have any karma listings, you should make one.')
+        msg(irc, data, 'I don\'t have any karma listings, you should make one.')
         return
 
     for user in KARMA:
-        __printKarma(irc, channel, user)
+        __printKarma(irc, data, user)
 
 def __save(filename):
     file = open(filename, 'wb')
@@ -81,9 +77,9 @@ def __load(filename):
         KARMA = pickle.load(file)
         file.close()
 
-def __printKarma(irc, channel, user):
+def __printKarma(irc, data, user):
     if irc is not None:
-        msg(irc, channel, user + ': ' + str(KARMA[user]))
+        msg(irc, data, user + ': ' + str(KARMA[user]))
 
 if __name__ == '__main__':
 

@@ -1,4 +1,5 @@
 from config import *
+from irc_utils import *
 from xml.dom import minidom
 import urllib
 
@@ -13,10 +14,8 @@ def weather(irc, data):
         args = data.split()
 
         if len(args) > args.index('weather') + 1:
-            channel = args[2]
             zipCode = args[args.index('weather') + 1]
-            message = __weatherAsString(zipCode)
-            irc.send('PRIVMSG ' + channel + ' :' + message + '\r\n')
+            msg(irc, data, __weatherAsString(zipCode))
 
 def __weatherAsString(zipCode):
     url = WEATHER_URL % zipCode

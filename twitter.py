@@ -1,4 +1,5 @@
 from config import *
+from irc_utils import *
 from xml.dom import minidom
 import urllib
 
@@ -9,13 +10,12 @@ def twitter(irc, data):
         args = data.split()
 
         if len(args) > args.index('twitter') + 1:
-            channel = args[2]
             user = args[args.index('twitter') + 1]
 
             tweet = __findTweet(user)
 
             if tweet is not None:
-                irc.send('PRIVMSG ' + channel + ' :"' + tweet + '"\r\n')
+                msg(irc, data, tweet)
 
 def __findTweet(user):
     url = 'http://twitter.com/statuses/user_timeline.rss?screen_name=%s' % user

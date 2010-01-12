@@ -31,13 +31,12 @@ def listen(irc):
 
         # Display plugin help
         if data.find('!%s help' % NICK) != -1:
-            channel = data.split()[2]
-            msg(irc, channel, 'Greetings traveler. Commands are triggered by typing !, then my name, then the command and any arguments.')
+            msg(irc, data, 'Greetings traveler. Commands are triggered by typing !, then my name, then the command and any arguments.')
             for p in plugins.MSG_PLUGINS:
                 if p.__doc__ is not None:
-                    msg(irc, channel, '   ' + p.__doc__)
+                    msg(irc, data, '   ' + p.__doc__)
 
-            msg(irc, channel, 'Thank you for using this bot. We hope no bodily harm comes to you during your usage.')
+            msg(irc, data, 'Thank you for using this bot. We hope no bodily harm comes to you during your usage.')
 
         # Let any plugins finish before quitting from command
         if data.find('!%s quit' % NICK) != -1:
@@ -80,7 +79,8 @@ def start():
 def speak(irc, channel, message):
     ''' Sends the given message to a channel on the IRC server. '''
 
-    msg(irc, channel, message)
+    irc.send('PRIVMSG ' + channel + ' :' + message + '\r\n')
+
 
 if __name__ == "__main__":
     irc = connect()
