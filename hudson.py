@@ -6,7 +6,7 @@ import urllib
 def hudson(irc, data):
     '''hudson [project] - Display the results of the last build for [project].'''
 
-    if data.find('!%s hudson ' % NICK) != -1:
+    if command(data, 'hudson'):
         args = data.split()
 
         if len(args) > args.index('hudson') + 1:

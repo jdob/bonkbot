@@ -1,11 +1,11 @@
 from config import *
-from irc_utils import msg
+from irc_utils import *
 import urllib
 
 def quote(irc, data):
     '''quote [symbol] - Display information for the stock [symbol].'''
 
-    if data.find('!%s quote' % NICK) != -1:
+    if command(data, 'quote'):
         args = data.split()
 
         if len(args) > args.index('quote') + 1:

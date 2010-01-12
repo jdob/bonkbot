@@ -19,3 +19,8 @@ KARMA_FILE = './karma.dict'
 
 # Insult -----
 MAKER = 'jdob'
+
+# Hudson -----
+HUDSON_BUILDS = {
+'project', '<url>'
+}

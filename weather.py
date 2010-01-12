@@ -10,7 +10,7 @@ WEATHER_FORMAT = '%s -> Temp: %sF, Condition: %s'
 def weather(irc, data):
     '''weather [zip] - Display weather information for [zip].'''
 
-    if data.find('!%s weather' % NICK) != -1:
+    if command(data, 'weather'):
         args = data.split()
 
         if len(args) > args.index('weather') + 1:

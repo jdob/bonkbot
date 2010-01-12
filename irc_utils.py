@@ -1,5 +1,10 @@
 from config import *
 
+def command(data, command):
+    ''' Returns True or False depending on if the given command was issued to the bot. '''
+
+    return data.find('!%s %s' % (NICK, command)) != -1
+
 def msg(irc, data, message):
     ''' Sends a message back to the appropriate destination, either a private message or a channel,
         based on what is found in the data. '''

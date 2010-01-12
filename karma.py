@@ -1,5 +1,5 @@
 from config import *
-from irc_utils import msg
+from irc_utils import *
 import pickle
 import os
 
@@ -21,7 +21,7 @@ def karma(irc, data):
     if data.find('--') != -1:
         __remove(irc, data)
 
-    if data.find('!%s karma' % NICK) != -1:
+    if command(data, 'karma'):
         __list(irc, data)
 
     __save(KARMA_FILE)

@@ -6,7 +6,7 @@ import urllib
 def twitter(irc, data):
     '''twitter [user] - Display the last tweet by twitter user [user].'''
 
-    if data.find('!%s twitter' % NICK) != -1:
+    if command(data, 'twitter'):
         args = data.split()
 
         if len(args) > args.index('twitter') + 1:

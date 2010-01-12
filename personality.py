@@ -43,7 +43,7 @@ MARIO = (
 def insult(irc, data):
     '''insult [user] - Send a random insult to [user].'''
 
-    if data.find('!%s insult' % NICK) != -1:
+    if command(data, 'insult'):
         args = data.split()
 
         # Make sure a user was selected to be insulted
@@ -61,17 +61,17 @@ def insult(irc, data):
 def maker(irc, data):
     '''maker - Speak random praise about the maker.'''
 
-    if data.find('!%s maker' % NICK) != -1:
+    if command(data, 'maker'):
         msg(irc, data, __randomSub(MAKER_COMMENTS, MAKER))
 
 def mario(irc, data):
     '''mario - Quotes from the great Super Mario.'''
 
-    if data.find('!%s mario' % NICK) != -1:
+    if command(data, 'mario'):
         msg(irc, data, __random(MARIO))
 
 def bacon(irc, data):
-    if data.find('!%s bacon' % NICK) != -1:
+    if command(data, 'bacon'):
         msg(irc, data, 'BACON!')
 
 def compliment(irc, data):

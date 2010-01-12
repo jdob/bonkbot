@@ -4,6 +4,7 @@ import karma
 import quote
 import twitter
 import ops
+import hudson
 
 MSG_PLUGINS = (
 personality.insult,
@@ -15,5 +16,6 @@ weather.weather,
 karma.karma,
 quote.quote,
 twitter.twitter,
-ops.give
+ops.give,
+hudson.hudson
 )
