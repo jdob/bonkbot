@@ -88,6 +88,11 @@ def join(irc, channel):
 
     irc_utils.join(irc, channel)
 
+def leave(irc, channel):
+    ''' Leaves the specified channel. '''
+
+    irc_utils.leave(irc, channel)
+
 if __name__ == "__main__":
     irc = connect()
     listen(irc)

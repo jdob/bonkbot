@@ -13,6 +13,9 @@ def msg(irc, data, message):
 def join(irc, channel):
     irc.send('JOIN %s\r\n' % channel)
 
+def leave(irc, channel):
+    irc.send('PART %s\r\n' % channel)
+
 def channel(data):
     return data.split()[2]
 
