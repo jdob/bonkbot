@@ -10,6 +10,9 @@ def msg(irc, data, message):
 
     irc.send('PRIVMSG ' + destination + ' :' + message + '\r\n')
 
+def join(irc, channel):
+    irc.send('JOIN %s\r\n' % channel)
+
 def channel(data):
     return data.split()[2]
 

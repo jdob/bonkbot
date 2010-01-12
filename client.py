@@ -1,5 +1,7 @@
 from config import *
 from irc_utils import msg
+
+import irc_utils
 import plugins
 import socket
 import sys
@@ -57,14 +59,14 @@ def connect():
     print('Received initial data')
 
     print('Sending initial configuration...')
-    irc.send('NICK %s\r\n' % (NICK))
+    irc.send('NICK %s\r\n' % NICK)
     irc.send('USER %s 0 * :%s\r\n' %(NICK, NAME))
-    irc.send('JOIN %s\r\n' % (CHANNELS))
+    join(irc, CHANNELS)
 
     print('Sent initial configuration:')
-    print('  NICK: %s' % (NICK))
-    print('  USER: %s' % (NAME))
-    print('  JOIN: %s' % (CHANNELS))
+    print('  NICK: %s' % NICK)
+    print('  USER: %s' % NAME)
+    print('  JOIN: %s' % CHANNELS)
 
     return irc
 
@@ -81,6 +83,10 @@ def speak(irc, channel, message):
 
     irc.send('PRIVMSG ' + channel + ' :' + message + '\r\n')
 
+def join(irc, channel):
+    ''' Joins the specified channel. '''
+
+    irc_utils.join(irc, channel)
 
 if __name__ == "__main__":
     irc = connect()
