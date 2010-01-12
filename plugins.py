@@ -9,6 +9,8 @@ MSG_PLUGINS = (
 personality.insult,
 personality.maker,
 personality.compliment,
+personality.mario,
+personality.bacon,
 weather.weather,
 karma.karma,
 quote.quote,

@@ -34,6 +34,12 @@ COMPLIMENTS = (
 'That sounds good %s, is there a JIRA for it?'
 )
 
+MARIO = (
+'I straight up just killed a dude with a turnip.',
+'Where are they getting all these hammers?!',
+'There are man eating plants in these pipes!'
+)
+
 def insult(irc, data):
     '''insult [user] - Send a random insult to [user].'''
 
@@ -49,9 +55,9 @@ def insult(irc, data):
                 msg(irc, channel, 'Nice try ' + author(data))
             elif user == MAKER:
                 msg(irc, channel, 'I would never insult the maker!')
-                msg(irc, channel, author(data) + ' - ' + __randomInsult())
+                msg(irc, channel, author(data) + ' - ' + __random(INSULTS))
             else:
-                msg(irc, channel, user + ' - ' + __randomInsult())
+                msg(irc, channel, user + ' - ' + __random(INSULTS))
 
 def maker(irc, data):
     '''maker - Speak random praise about the maker.'''
@@ -59,22 +65,30 @@ def maker(irc, data):
     if data.find('!%s maker' % NICK) != -1:
         args = data.split()
         channel = args[2]
-        msg(irc, channel, __randomMaker())
+        msg(irc, channel, __randomSub(MAKER_COMMENTS, MAKER))
+
+def mario(irc, data):
+    '''mario - Quotes from the great Super Mario.'''
+
+    if data.find('!%s mario' % NICK) != -1:
+        channel = data.split()[2]
+        msg(irc, channel, __random(MARIO))
+
+def bacon(irc, data):
+    if data.find('!%s bacon' % NICK) != -1:
+        channel = data.split()[2]
+        msg(irc, channel, 'BACON!')
 
 def compliment(irc, data):
     if random.randint(0, 1000) == 705:
-        message = __randomCompliment(author(data))
+        message = __randomSub(COMPLIMENTS, author(data))
         channel = data.split()[2]
         msg(irc, channel, message)
 
-def __randomInsult():
-    index = random.randint(0, len(INSULTS) - 1)
-    return INSULTS[index]
+def __random(list):
+    index = random.randint(0, len(list) - 1)
+    return list[index]
 
-def __randomMaker():
-    index = random.randint(0, len(MAKER_COMMENTS) - 1)
-    return MAKER_COMMENTS[index] % MAKER
-
-def __randomCompliment(user):
-    index = random.randint(0, len(COMPLIMENTS) -1)
-    return COMPLIMENTS[index] % user
+def __randomSub(list, sub):
+    index = random.randint(0, len(list) - 1)
+    return list[index] % sub
