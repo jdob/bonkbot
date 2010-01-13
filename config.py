@@ -22,5 +22,5 @@ MAKER = 'jdob'
 
 # Hudson -----
 HUDSON_BUILDS = {
-'project', '<url>'
+'project' : '<url>'
 }
