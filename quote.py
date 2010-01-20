@@ -1,11 +1,10 @@
-from config import *
 from irc_utils import *
 import urllib
 
-def quote(irc, data):
+def quote(irc, config, data):
     '''quote [symbol] - Display information for the stock [symbol].'''
 
-    if command(data, 'quote'):
+    if command(config, data, 'quote'):
         args = data.split()
 
         if len(args) > args.index('quote') + 1:
@@ -14,7 +13,7 @@ def quote(irc, data):
             price = __lookup(symbol, 'l1')
             change = __lookup(symbol, 'c1')
 
-            msg(irc, data, symbol + ' - Price: $' + price + ', Change: $' + change)
+            msg(irc, config, data, symbol + ' - Price: $' + price + ', Change: $' + change)
 
 def __lookup(symbol, f):
     url = 'http://finance.yahoo.com/d/quotes.csv?s=%s&f=%s' % (symbol, f)

@@ -1,0 +1,19 @@
+{
+    "host": "localhost",
+    "port": "6667",
+
+    "nick": "bonk",
+    "name": "Bonk Bot",
+    
+    "channels": "#bonk",
+
+    "debug": "True",
+
+    "karmaFile": "./karma.dict",
+
+    "maker": "jdob",
+
+    "hudsonUrl": "http://localhost:8080/job/%s/rssAll",
+
+    "hudsonBuilds": [ "content", "master" ]
+}

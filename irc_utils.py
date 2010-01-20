@@ -1,16 +1,15 @@
-from config import *
 
-def command(data, command):
+def command(config, data, command):
     ''' Returns True or False depending on if the given command was issued to the bot. '''
 
-    return data.find('!%s %s' % (NICK, command)) != -1
+    return data.find('!%s %s' % (config['nick'], command)) != -1
 
-def msg(irc, data, message):
+def msg(irc, config, data, message):
     ''' Sends a message back to the appropriate destination, either a private message or a channel,
         based on what is found in the data. '''
     
     destination = channel(data)
-    if destination == NICK:
+    if destination == config['nick']:
         destination = author(data)
 
     irc.send('PRIVMSG ' + destination + ' :' + message + '\r\n')
@@ -29,4 +28,3 @@ def author(data):
 
 if __name__ == '__main__':
     print(author(':jdob!~jdob@127.0.0.1 MODE #bonk +o bonk'))
-

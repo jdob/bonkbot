@@ -1,4 +1,3 @@
-from config import *
 from irc_utils import *
 import random
 
@@ -40,44 +39,44 @@ MARIO = (
 'There are man eating plants in these pipes!'
 )
 
-def insult(irc, data):
+def insult(irc, config, data):
     '''insult [user] - Send a random insult to [user].'''
 
-    if command(data, 'insult'):
+    if command(config, data, 'insult'):
         args = data.split()
 
         # Make sure a user was selected to be insulted
         if len(args) > args.index('insult') + 1:
             user = args[args.index('insult') + 1]
 
-            if user == NICK:
-                msg(irc, data, 'Nice try ' + author(data))
-            elif user == MAKER:
-                msg(irc, data, 'I would never insult the maker!')
-                msg(irc, data, author(data) + ' - ' + __random(INSULTS))
+            if user == config['nick']:
+                msg(irc, config, data, 'Nice try ' + author(data))
+            elif user == config['maker']:
+                msg(irc, config, data, 'I would never insult the maker!')
+                msg(irc, config, data, author(data) + ' - ' + __random(INSULTS))
             else:
-                msg(irc, data, user + ' - ' + __random(INSULTS))
+                msg(irc, config, data, user + ' - ' + __random(INSULTS))
 
-def maker(irc, data):
+def maker(irc, config, data):
     '''maker - Speak random praise about the maker.'''
 
-    if command(data, 'maker'):
-        msg(irc, data, __randomSub(MAKER_COMMENTS, MAKER))
+    if command(config, data, 'maker'):
+        msg(irc, config, data, __randomSub(MAKER_COMMENTS, config['maker']))
 
-def mario(irc, data):
+def mario(irc, config, data):
     '''mario - Quotes from the great Super Mario.'''
 
-    if command(data, 'mario'):
-        msg(irc, data, __random(MARIO))
+    if command(config, data, 'mario'):
+        msg(irc, config, data, __random(MARIO))
 
-def bacon(irc, data):
-    if command(data, 'bacon'):
-        msg(irc, data, 'BACON!')
+def bacon(irc, config, data):
+    if command(config, data, 'bacon'):
+        msg(irc, config, data, 'BACON!')
 
-def compliment(irc, data):
+def compliment(irc, config, data):
     if random.randint(0, 1000) == 705:
         message = __randomSub(COMPLIMENTS, author(data))
-        msg(irc, data, message)
+        msg(irc, config, data, message)
 
 def __random(list):
     index = random.randint(0, len(list) - 1)
