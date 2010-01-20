@@ -5,6 +5,7 @@ import quote
 import twitter
 import ops
 import hudson
+import dictionary
 
 MSG_PLUGINS = (
 personality.insult,
@@ -17,5 +18,6 @@ karma.karma,
 quote.quote,
 twitter.twitter,
 ops.give,
-hudson.hudson
+hudson.hudson,
+dictionary.wotd
 )
