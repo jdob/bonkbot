@@ -6,6 +6,7 @@ import twitter
 import ops
 import hudson
 import dictionary
+import ping
 
 MSG_PLUGINS = (
 personality.insult,
@@ -17,5 +18,6 @@ quote.quote,
 twitter.twitter,
 ops.give,
 hudson.hudson,
-dictionary.wotd
+dictionary.wotd,
+ping.ping
 )
