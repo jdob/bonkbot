@@ -1,0 +1,20 @@
+============================================================
+                        Bonk IRC Bot
+============================================================
+
+To run:
+
+1.  Change the necessary values in config.json to reflect your
+    environment.
+
+2a. Daemon: Run "python client &".
+
+2b. Interactive: Start python and run the following:
+
+>>> from client import *
+>>> irc, config = start()
+
+The irc variable holds on to the IRC connection. It (and potentially
+the config) are used in calls to control the bot, such as making it
+send messages or join new channels.
+
