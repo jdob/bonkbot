@@ -106,12 +106,12 @@ def leave(irc, channel):
 def start():
     ''' Connects and starts a new thread listening to incoming server data. The connection
         to the IRC server is returned. '''
-
+    global config
     configure()
 
     irc = connect()
     thread.start_new_thread(listen, (irc,))
-    return irc
+    return (irc, config)
 
 if __name__ == "__main__":
     configure()
