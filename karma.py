@@ -1,4 +1,3 @@
-from irc_utils import *
 import pickle
 import os
 
@@ -6,27 +5,27 @@ KARMA = {}
 
 loaded = False
 
-def karma(irc, config, data):
+def karma(message):
     '''karma - Display all karma data known to the bot.'''
 
     global loaded
     if not loaded:
-        __load(config['karmaFile'])
+        __load(message.config['karmaFile'])
         loaded = True
 
-    if data.find('++') != -1:
-        __add(irc, config, data)
+    if message.data.find('++') != -1:
+        __add(message)
 
-    if data.find('--') != -1:
-        __remove(irc, config, data)
+    if message.data.find('--') != -1:
+        __remove(message)
 
-    if command(config, data, 'karma'):
-        __list(irc, config, data)
+    if message.command('karma'):
+        __list(message)
 
-    __save(config['karmaFile'])
+    __save(message.config['karmaFile'])
 
-def __add(irc, config, data):
-    for s in data.split():
+def __add(message):
+    for s in message.data.split():
         index = s.find('++')
         if index > 0:
             name = s[:index]
@@ -38,10 +37,10 @@ def __add(irc, config, data):
                 KARMA[name] = int(KARMA[name]) + 1
             else:
                 KARMA[name] = 1
-            __printKarma(irc, config, data, name)
+            __printKarma(message, name)
 
-def __remove(irc, config, data):
-    for s in data.split():
+def __remove(message):
+    for s in message.data.split():
         index = s.find('--')
         if index > 0:
             name = s[:index]
@@ -53,15 +52,15 @@ def __remove(irc, config, data):
                 KARMA[name] = int(KARMA[name]) - 1
             else:
                 KARMA[name] = -1
-            __printKarma(irc, config, data, name)
+            __printKarma(message, name)
 
-def __list(irc, config, data):
+def __list(message):
     if len(KARMA) == 0:
-        msg(irc, config, data, 'I don\'t have any karma listings, you should make one.')
+        message.reply('I don\'t have any karma listings, you should make one.')
         return
 
     for user in KARMA:
-        __printKarma(irc, config, data, user)
+        __printKarma(message, user)
 
 def __save(filename):
     file = open(filename, 'wb')
@@ -76,34 +75,5 @@ def __load(filename):
         KARMA = pickle.load(file)
         file.close()
 
-def __printKarma(irc, config, data, user):
-    if irc is not None:
-        msg(irc, config, data, user + ': ' + str(KARMA[user]))
-
-if __name__ == '__main__':
-
-    print(KARMA)
-
-    __add(None, 'PRIVMSG #test :jdob++')
-    __add(None, 'PRIVMSG #test :jdob++ jdob++')
-
-    print(KARMA)
-
-    __remove(None, 'PRIVMSG #test :jdob--')
-    __remove(None, 'PRIVMSG #test :jdob-- jdob-- jdob-- jdob--')
-    __remove(None, 'PRIVMSG #test :mdob--')
-
-    print(KARMA)
-
-    tmpFile = '/tmp/karma.tmp'
-    __save(tmpFile)
-
-    KARMA = {}
-
-    print(KARMA)
-
-    __load(tmpFile)
-
-    print(KARMA)
-
-    os.remove(tmpFile)
+def __printKarma(message, user):
+    message.reply(user + ': ' + str(KARMA[user]))
