@@ -1,12 +1,11 @@
-from irc_utils import *
 from xml.dom import minidom
 import urllib
 
-def twitter(irc, config, data):
+def twitter(message):
     '''twitter [user] - Display the last tweet by twitter user [user].'''
 
-    if command(config, data, 'twitter'):
-        args = data.split()
+    if message.command('twitter'):
+        args = message.data.split()
 
         if len(args) > args.index('twitter') + 1:
             user = args[args.index('twitter') + 1]
@@ -14,7 +13,7 @@ def twitter(irc, config, data):
             tweet = __findTweet(user)
 
             if tweet is not None:
-                msg(irc, config, data, tweet)
+                message.reply(tweet)
 
 def __findTweet(user):
     url = 'http://twitter.com/statuses/user_timeline.rss?screen_name=%s' % user

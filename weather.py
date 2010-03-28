@@ -1,4 +1,3 @@
-from irc_utils import *
 from xml.dom import minidom
 import urllib
 
@@ -6,15 +5,15 @@ WEATHER_URL = 'http://xml.weather.yahoo.com/forecastrss?p=%s'
 WEATHER_NS = 'http://xml.weather.yahoo.com/ns/rss/1.0'
 WEATHER_FORMAT = '%s -> Temp: %sF, Condition: %s'
 
-def weather(irc, config, data):
+def weather(message):
     '''weather [zip] - Display weather information for [zip].'''
 
-    if command(config, data, 'weather'):
-        args = data.split()
+    if message.command('weather'):
+        args = message.data.split()
 
         if len(args) > args.index('weather') + 1:
             zipCode = args[args.index('weather') + 1]
-            msg(irc, config, data, __weatherAsString(zipCode))
+            message.reply(__weatherAsString(zipCode))
 
 def __weatherAsString(zipCode):
     url = WEATHER_URL % zipCode

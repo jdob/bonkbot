@@ -1,23 +1,14 @@
-import personality
-import weather
-import karma
-import quote
-import twitter
 import ops
-import hudson
-import dictionary
-import ping
+import personality
+import stock
+import twitter
+import weather
 
 MSG_PLUGINS = (
-personality.insult,
-personality.compliment,
-personality.bacon,
-weather.weather,
-karma.karma,
-quote.quote,
-twitter.twitter,
-ops.give,
-hudson.hudson,
-dictionary.wotd,
-ping.ping
+    ops.give,
+    personality.insult,
+    personality.compliment,
+    stock.stock,
+    twitter.twitter,
+    weather.weather,
 )
