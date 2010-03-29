@@ -15,6 +15,11 @@ class BonkMessage:
     def command(self, cmd):
         return self.data.find('!%s %s' % (self.config['nick'], cmd)) != -1
 
+    def command_args(self, cmd):
+        args = self.data.split()
+        cmd_args = args[args.index(cmd) + 1:]
+        return cmd_args
+
     def reply(self, message):
         destination = self.channel()
         if destination == self.config['nick']:

@@ -3,11 +3,9 @@ def speak(message):
     if not message.command('speak'):
         return
 
-    args = message.data.split()
-    if len(args) > args.index('speak') + 1:
-        channel = args[args.index('speak') + 1]
-
-    speak_args = args[args.index('speak') + 2:]
+    cmd_args = message.command_args('speak')
+    channel = cmd_args[0]
+    speak_args = cmd_args[1:]
     say_this = ' '.join(speak_args)
 
     message.say(channel, say_this)
