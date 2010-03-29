@@ -36,6 +36,14 @@ class BonkMessage:
     def author(self):
         return self.data[1 : self.data.index('!')]
 
+    def admin(self):
+        author = self.author()
+        for admin in self.config['admins']:
+            if admin == author:
+                return True
+        else:
+            return False
+
 class BonkBot:
 
     def __init__(self, config):

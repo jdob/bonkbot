@@ -39,8 +39,8 @@ def insult(message):
 
             if user == message.config['nick']:
                 message.reply('Nice try ' + message.author())
-            elif user == message.config['maker']:
-                message.reply('I would never insult the maker!')
+            elif user in message.config['admins']:
+                message.reply('I would never insult an admin!')
                 message.reply(message.author() + ' - ' + __random(INSULTS))
             else:
                 message.reply(user + ' - ' + __random(INSULTS))

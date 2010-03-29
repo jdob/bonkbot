@@ -11,4 +11,5 @@ debug: 'True'
 
 karmaFile: './karma.dict'
 
-maker: 'jdob'
+admins:
+- 'jdob'
