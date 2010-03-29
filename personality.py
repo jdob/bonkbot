@@ -32,11 +32,11 @@ COMPLIMENTS = (
 def insult(message):
     '''insult [user] - Send a random insult to [user].'''
 
-    args = message.data.split()
+    cmd_args = message.command_args('insult')
 
     # Make sure a user was selected to be insulted
-    if len(args) > args.index('insult') + 1:
-        user = args[args.index('insult') + 1]
+    if len(cmd_args) > 0:
+        user = cmd_args[0]
 
         if user == message.config['nick']:
             message.reply('Nice try ' + message.author())
