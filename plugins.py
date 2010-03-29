@@ -9,6 +9,8 @@ import weather
 
 MSG_PLUGINS = (
     control.speak,
+    control.join,
+    control.leave,
     karma.karma,
     log.log,
     ops.give,
