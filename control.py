@@ -1,6 +1,6 @@
 
 def speak(message):
-    if not message.command('speak'):
+    if not message.command('speak') or not message.admin():
         return
 
     cmd_args = message.command_args('speak')
@@ -11,7 +11,7 @@ def speak(message):
     message.say(channel, say_this)
 
 def join(message):
-    if not message.command('join'):
+    if not message.command('join') or not message.admin():
         return
 
     cmd_args = message.command_args('join')
@@ -19,7 +19,7 @@ def join(message):
     message.irc.send('JOIN %s\r\n' % channel)
 
 def leave(message):
-    if not message.command('leave'):
+    if not message.command('leave') or not message.admin():
         return
 
     cmd_args = message.command_args('leave')
