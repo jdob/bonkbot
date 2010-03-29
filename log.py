@@ -1,2 +1,6 @@
+import logging
+
+LOG = logging.getLogger('bonk.plugin.log')
+
 def log(message):
-    print(message.data)
+    LOG.info(message.data)
