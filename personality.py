@@ -1,3 +1,4 @@
+from decorators import command
 import random
 
 INSULTS = (
@@ -27,33 +28,33 @@ COMPLIMENTS = (
 'That sounds good %s, is there a JIRA for it?'
 )
 
+@command('insult')
 def insult(message):
     '''insult [user] - Send a random insult to [user].'''
 
-    if message.command('insult'):
-        args = message.data.split()
+    args = message.data.split()
 
-        # Make sure a user was selected to be insulted
-        if len(args) > args.index('insult') + 1:
-            user = args[args.index('insult') + 1]
+    # Make sure a user was selected to be insulted
+    if len(args) > args.index('insult') + 1:
+        user = args[args.index('insult') + 1]
 
-            if user == message.config['nick']:
-                message.reply('Nice try ' + message.author())
-            elif user in message.config['admins']:
-                message.reply('I would never insult an admin!')
-                message.reply(message.author() + ' - ' + __random(INSULTS))
-            else:
-                message.reply(user + ' - ' + __random(INSULTS))
+        if user == message.config['nick']:
+            message.reply('Nice try ' + message.author())
+        elif user in message.config['admins']:
+            message.reply('I would never insult an admin!')
+            message.reply(message.author() + ' - ' + __random(INSULTS))
+        else:
+            message.reply(user + ' - ' + __random(INSULTS))
 
 def compliment(message):
     if random.randint(0, 1000) == 705:
-        msg = __randomSub(COMPLIMENTS, message.author())
+        msg = __random_sub(COMPLIMENTS, message.author())
         message.reply(msg)
 
 def __random(list):
     index = random.randint(0, len(list) - 1)
     return list[index]
 
-def __randomSub(list, sub):
+def __random_sub(list, sub):
     index = random.randint(0, len(list) - 1)
     return list[index] % sub

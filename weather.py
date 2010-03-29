@@ -1,3 +1,4 @@
+from decorators import command
 from xml.dom import minidom
 import urllib
 
@@ -5,17 +6,17 @@ WEATHER_URL = 'http://xml.weather.yahoo.com/forecastrss?p=%s'
 WEATHER_NS = 'http://xml.weather.yahoo.com/ns/rss/1.0'
 WEATHER_FORMAT = '%s -> Temp: %sF, Condition: %s'
 
+@command('weather')
 def weather(message):
     '''weather [zip] - Display weather information for [zip].'''
 
-    if message.command('weather'):
-        args = message.data.split()
+    args = message.data.split()
 
-        if len(args) > args.index('weather') + 1:
-            zipCode = args[args.index('weather') + 1]
-            message.reply(__weatherAsString(zipCode))
+    if len(args) > args.index('weather') + 1:
+        zipCode = args[args.index('weather') + 1]
+        message.reply(__weather_as_string(zipCode))
 
-def __weatherAsString(zipCode):
+def __weather_as_string(zipCode):
     url = WEATHER_URL % zipCode
     dom = minidom.parse(urllib.urlopen(url))
     condition = dom.getElementsByTagNameNS(WEATHER_NS, 'condition')[0]

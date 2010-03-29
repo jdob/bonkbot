@@ -1,8 +1,8 @@
+from decorators import command, admin
 
+@command('speak')
+@admin
 def speak(message):
-    if not message.command('speak') or not message.admin():
-        return
-
     cmd_args = message.command_args('speak')
     channel = cmd_args[0]
     speak_args = cmd_args[1:]
@@ -10,18 +10,16 @@ def speak(message):
 
     message.say(channel, say_this)
 
+@command('join')
+@admin
 def join(message):
-    if not message.command('join') or not message.admin():
-        return
-
     cmd_args = message.command_args('join')
     channel = cmd_args[0]
     message.irc.send('JOIN %s\r\n' % channel)
 
+@command('leave')
+@admin
 def leave(message):
-    if not message.command('leave') or not message.admin():
-        return
-
     cmd_args = message.command_args('leave')
     channel = cmd_args[0]
     message.irc.send('PART %s\r\n' % channel)
