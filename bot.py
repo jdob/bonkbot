@@ -67,10 +67,9 @@ class BonkBot:
         LOG.info('  JOIN: %s' % channels)
 
     def listen(self):
-        
+
         while True:
             data = self.irc.recv(4096)
-
             if data.find('PING') != -1:
                 self.irc.send('PONG ' + data.split()[1] + '\r\n')
 
