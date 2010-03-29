@@ -7,4 +7,4 @@ To run:
 1.  Change the necessary values in config.yml to reflect your
     environment.
 
-2. Daemon: Run "python run.py &".
+2.  Run "python run.py &".
