@@ -2,6 +2,8 @@ from decorators import command
 
 @command('invite')
 def invite(message):
+    '''invite [channel_name] [user] [user] ...'''
+
     args = message.command_args('invite')
 
     channel = args[0]
