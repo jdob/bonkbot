@@ -3,6 +3,7 @@ import karma
 import log
 import ops
 import personality
+import private_channel
 import stock
 import twitter
 import weather
@@ -16,6 +17,7 @@ MSG_PLUGINS = (
     ops.give,
     personality.insult,
     personality.compliment,
+    private_channel.invite,
     stock.stock,
     twitter.twitter,
     weather.weather,
