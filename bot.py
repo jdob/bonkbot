@@ -88,7 +88,7 @@ class BonkBot:
             for p in plugins.MSG_PLUGINS:
                 message = BonkMessage(self.irc, self.config, data)
                 try:
-                    p(message)
+                    thread.start_new_thread(p, (message,))
                 except:
                     LOG.exception('Error from plugin [%s]' % p.__name__)
 
