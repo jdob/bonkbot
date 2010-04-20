@@ -13,10 +13,10 @@ FORECAST_FORMAT = '%s -> Low: %sF, High: %sF, Condition: %s'
 def weather(message):
     '''weather [zip] - Display weather information for [zip].'''
 
-    args = message.data.split()
+    args = message.command_args('weather')
 
-    if len(args) > args.index('weather') + 1:
-        zip_code = args[args.index('weather') + 1]
+    if len(args) > 0:
+        zip_code = args[0]
         msgs = __weather_as_strings(zip_code)
         for m in msgs:
             message.reply(m)
