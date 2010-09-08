@@ -11,6 +11,7 @@ class command:
             message = args[0]
             if message.command(self.name):
                 f(*args)
+        wrapped.__doc__ = f.__doc__
         return wrapped
 
 class admin:

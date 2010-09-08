@@ -85,8 +85,8 @@ class BonkBot:
             if data.find('PING') != -1:
                 self.irc.send('PONG ' + data.split()[1] + '\r\n')
 
+            message = BonkMessage(self.irc, self.config, data)
             for p in plugins.MSG_PLUGINS:
-                message = BonkMessage(self.irc, self.config, data)
                 try:
                     thread.start_new_thread(p, (message,))
                 except:
