@@ -29,3 +29,7 @@ MSG_PLUGINS = (
     twitter.twitter,
     weather.weather,
 )
+
+INIT_PLUGINS = (
+    karma.load,
+)

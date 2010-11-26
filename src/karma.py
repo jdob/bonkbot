@@ -15,15 +15,8 @@ VALID_NAME = r'^([A-Za-z0-9_-]|\[|\])*$'
 
 KARMA = {}
 
-loaded = False
-
 def karma(message):
     '''karma - Display all karma data known to the bot.'''
-
-    global loaded
-    if not loaded:
-        __load(message.config['karmaFile'])
-        loaded = True
 
     if message.data.find('++') != -1:
         __add(message)
@@ -35,6 +28,15 @@ def karma(message):
         __list(message)
 
     __save(message.config['karmaFile'])
+
+def load(irc_client, config):
+    global KARMA
+
+    filename = config['karmaFile']
+    if os.path.exists(filename):
+        file = open(filename, 'rb')
+        KARMA = pickle.load(file)
+        file.close()
 
 def __add(message):
     __assign_karma(message, '++', 1)
@@ -75,14 +77,6 @@ def __save(filename):
     file = open(filename, 'wb')
     pickle.dump(KARMA, file)
     file.close()
-
-def __load(filename):
-    global KARMA
-
-    if os.path.exists(filename):
-        file = open(filename, 'rb')
-        KARMA = pickle.load(file)
-        file.close()
 
 def __printKarma(message, user):
     message.reply(user + ': ' + str(KARMA[user]))

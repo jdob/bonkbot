@@ -96,6 +96,10 @@ class BonkBot:
         self.irc_client.connect(host, port, nick, name)
         LOG.info('Connected to [%s]' % host)
 
+        # Initialize any plugins that require it
+        for p in plugins.INIT_PLUGINS:
+            p(self.irc_client, self.config)
+
         # Join any channels configured by default
         for channel in channels:
             self.irc_client.join(channel)
