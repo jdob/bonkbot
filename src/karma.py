@@ -65,7 +65,7 @@ def __assign_karma(message, flag, step):
 
 def __list(message):
     if len(KARMA) == 0:
-        message.reply('I don\'t have any karma listings, you should make one.')
+        message.reply('I don\'t have any karma listings, you should add some.')
         return
 
     for user in KARMA:

@@ -7,10 +7,12 @@
 # along with this software; if not, see
 # http://www.gnu.org/licenses/old-licenses/gpl-2.0.txt.
 
-def give(message):
-    if message.data.find('JOIN') != -1:
-        new_op = message.author()
+from decorators import join
 
-        # Don't try to op yourself
-        if new_op != message.config['nick']:
-            message.irc.send('MODE ' + message.channel()[1:] + ' +o ' + message.author() + '\r\n')
+@join
+def give(message):
+    new_op = message.author()
+
+    # Don't try to op yourself
+    if new_op != message.config['nick']:
+        message.irc_client.give_ops(message.channel()[1:], message.author())

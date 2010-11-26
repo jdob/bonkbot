@@ -23,6 +23,20 @@ class command:
         wrapped.__doc__ = f.__doc__
         return wrapped
 
+class join:
+    '''
+    Runs the function if the command represents a user joining a channel in which
+    the bot exists.
+    '''
+
+    def __init__(self, f):
+        self.f = f
+
+    def __call__(self, *args):
+        message = args[0]
+        if message.is_join():
+            self.f(*args)
+        
 class admin:
     '''
     Runs the function only if the author giving the command is registered as an admin.

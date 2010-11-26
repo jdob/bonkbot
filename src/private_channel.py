@@ -19,8 +19,8 @@ def invite(message):
     invitees = args[1:]
     topic = '%s channel created by %s' % (message.config['name'], message.author())
 
-    message.irc.send('JOIN %s\r\n' % channel)
-    message.irc.send('TOPIC %s :%s\r\n' % (channel, topic))
+    message.irc_cliebt.join(channel)
+    message.irc_client.topic(channel, topic)
 
     for person in invitees:
-        message.irc.send('INVITE %s %s\r\n' % (person, channel))
+        message.irc_client.invite(channel, person)
