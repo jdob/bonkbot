@@ -9,7 +9,6 @@
 
 import control
 import karma
-import log
 import ops
 import personality
 import private_channel
@@ -22,7 +21,6 @@ MSG_PLUGINS = (
     control.join,
     control.leave,
     karma.karma,
-    log.log,
     ops.give,
     personality.insult,
     personality.compliment,

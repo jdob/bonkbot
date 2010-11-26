@@ -92,7 +92,7 @@ class BonkBot:
         channels = self.config['channels']
 
         LOG.info('Connecting to [%s] on port [%s]' % (host, port))
-        self.irc_client.connect(host, port)
+        self.irc_client.connect(host, port, nick, name)
         LOG.info('Connected to [%s]' % host)
 
         for channel in channels:
@@ -109,7 +109,7 @@ class BonkBot:
             data = self.irc_client.receive()
 
             if data.find('PING') != -1:
-                self.irc_client.send('PONG ' + data.split()[1] + '\r\n')
+                self.irc_client.raw('PONG ' + data.split()[1] + '\r\n')
 
             message = BonkMessage(self.irc_client, self.config, data)
             for p in plugins.MSG_PLUGINS:
@@ -120,9 +120,9 @@ class BonkBot:
 
             if message.command('help'):
                 message.reply('Greetings traveler. Commands are triggered by typing !, then my name, then the command and any arguments it may have.')
-                    
+
                 for p in plugins.MSG_PLUGINS:
-                    if p.__doc__ is not None:
+                    if p.__doc__ is not None and p.__doc__.strip() != '':
                         message.reply('   %s' % p.__doc__)
 
             if message.command('quit'):

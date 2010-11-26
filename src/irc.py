@@ -7,12 +7,14 @@
 # along with this software; if not, see
 # http://www.gnu.org/licenses/old-licenses/gpl-2.0.txt.
 
+import socket
+
 class IRCClient():
     '''
     Sends the appropriate IRC calls for various IRC related operations.
     '''
 
-    def __init__(self, socket):
+    def __init__(self):
         self.socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 
     def connect(self, host, port, nick, name):
@@ -50,3 +52,6 @@ class IRCClient():
 
     def invite(self, channel, user):
         self.socket.send('INVITE %s %s\r\n' % (user, channel))
+
+    def raw(self, command):
+        self.socket.send(command)
