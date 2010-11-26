@@ -91,10 +91,12 @@ class BonkBot:
         name = self.config['name']
         channels = self.config['channels']
 
+        # Establish the connection to the chat server
         LOG.info('Connecting to [%s] on port [%s]' % (host, port))
         self.irc_client.connect(host, port, nick, name)
         LOG.info('Connected to [%s]' % host)
 
+        # Join any channels configured by default
         for channel in channels:
             self.irc_client.join(channel)
 
@@ -105,7 +107,8 @@ class BonkBot:
 
     def listen(self):
 
-        while True:
+        listening = True
+        while listening:
             data = self.irc_client.receive()
 
             if data.find('PING') != -1:
@@ -126,7 +129,8 @@ class BonkBot:
                         message.reply('   %s' % p.__doc__)
 
             if message.command('quit'):
-                message.irc_client.quit('Fine, I\'ll leave...')
+                listening = False
+                self.irc_client.quit('Fine, I\'ll leave...')
 
     def start(self):
         self.connect()
