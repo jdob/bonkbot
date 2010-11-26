@@ -63,7 +63,7 @@ def __assign_karma(message, flag, step):
         else:
             KARMA[name] = step
 
-        __printKarma(message, name)
+        __print_karma(message, name)
 
 def __list(message):
     if len(KARMA) == 0:
@@ -71,12 +71,12 @@ def __list(message):
         return
 
     for user in KARMA:
-        __printKarma(message, user)
+        __print_karma(message, user)
 
 def __save(filename):
     file = open(filename, 'wb')
     pickle.dump(KARMA, file)
     file.close()
 
-def __printKarma(message, user):
+def __print_karma(message, user):
     message.reply(user + ': ' + str(KARMA[user]))
