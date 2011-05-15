@@ -41,7 +41,7 @@ def karma(message):
     if message.command('karma'):
         __list(message)
 
-    __save(message.config.get('plugin', 'karma_file'))
+    __save(CONFIG.get('plugin', 'karma_file'))
 
 def __add(message):
     __assign_karma(message, '++', 1)
