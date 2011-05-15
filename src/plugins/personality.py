@@ -7,7 +7,7 @@
 # along with this software; if not, see
 # http://www.gnu.org/licenses/old-licenses/gpl-2.0.txt.
 
-from decorators import command
+from bonkbot.decorators import command
 import random
 
 INSULTS = (
@@ -36,6 +36,10 @@ COMPLIMENTS = (
 'That\'s a great idea %s, I wish I had thought of that.',
 'That sounds good %s, is there a JIRA for it?'
 )
+
+
+def init_plugin(config, irc_client):
+    return [insult, compliment]
 
 @command('insult')
 def insult(message):

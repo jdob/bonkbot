@@ -7,8 +7,12 @@
 # along with this software; if not, see
 # http://www.gnu.org/licenses/old-licenses/gpl-2.0.txt.
 
-from decorators import command
+from bonkbot.decorators import command
 import urllib
+
+
+def init_plugin(config, irc_client):
+    return [stock]
 
 @command('stock')
 def stock(message):

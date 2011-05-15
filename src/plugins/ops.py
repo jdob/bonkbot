@@ -7,7 +7,11 @@
 # along with this software; if not, see
 # http://www.gnu.org/licenses/old-licenses/gpl-2.0.txt.
 
-from decorators import join
+from bonkbot.decorators import join
+
+
+def init_plugin(config, irc_client):
+    return [give]
 
 @join
 def give(message):

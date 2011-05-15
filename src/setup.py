@@ -7,23 +7,14 @@
 # along with this software; if not, see
 # http://www.gnu.org/licenses/old-licenses/gpl-2.0.txt.
 
-import bot
-import logging
-import yaml
+from setuptools import setup
 
-def configure():
-    data = open('config.yml').read()
-    config = yaml.load(data)
+setup(
+        name='bonkbot',
+        version='1.0.0',
+        packages=['bonkbot'],
+        scripts=['../bin/bonkbot'],
 
-    return config
-
-def main():
-    config = configure()
-    bonkbot = bot.BonkBot(config)
-    bonkbot.start()
-
-if __name__ == '__main__':
-    logging.root.addHandler(logging.StreamHandler())
-    logging.root.setLevel(logging.INFO)
-
-    main()
+        author='Jay Dobies',
+        author_email='jdobies@gmail.com',
+)

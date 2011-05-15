@@ -9,9 +9,10 @@
 
 import socket
 
-class IRCClient():
+class IRCClient(object):
     '''
-    Sends the appropriate IRC calls for various IRC related operations.
+    Represents a connection to an IRC server. Once connected, commands issued
+    to instances of this class will be sent to the IRC server.
     '''
 
     def __init__(self):

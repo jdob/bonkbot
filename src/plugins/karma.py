@@ -13,7 +13,21 @@ import os
 
 VALID_NAME = r'^([A-Za-z0-9_-]|\[|\])*$'
 
+CONFIG = None
 KARMA = {}
+
+def init_plugin(config, irc_client):
+    global CONFIG
+    CONFIG = config
+
+    global KARMA
+    filename = config.get('plugin', 'karma_file')
+    if os.path.exists(filename):
+        file = open(filename, 'rb')
+        KARMA = pickle.load(file)
+        file.close()
+
+    return [karma]
 
 def karma(message):
     '''karma - Display all karma data known to the bot.'''
@@ -27,16 +41,7 @@ def karma(message):
     if message.command('karma'):
         __list(message)
 
-    __save(message.config['karmaFile'])
-
-def load(irc_client, config):
-    global KARMA
-
-    filename = config['karmaFile']
-    if os.path.exists(filename):
-        file = open(filename, 'rb')
-        KARMA = pickle.load(file)
-        file.close()
+    __save(message.config.get('plugin', 'karma_file'))
 
 def __add(message):
     __assign_karma(message, '++', 1)

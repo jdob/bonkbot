@@ -1,4 +1,5 @@
 #!/usr/bin/python
+# -*- coding: utf-8 -*-
 #
 # This software is licensed to you under the GNU General Public License,
 # version 2 (GPLv2). There is NO WARRANTY for this software, express or
@@ -7,29 +8,9 @@
 # along with this software; if not, see
 # http://www.gnu.org/licenses/old-licenses/gpl-2.0.txt.
 
-import control
-import karma
-import ops
-import personality
-import private_channel
-import stock
-import twitter
-import weather
+import sys
 
-MSG_PLUGINS = (
-    control.speak,
-    control.join,
-    control.leave,
-    karma.karma,
-    ops.give,
-    personality.insult,
-    personality.compliment,
-    private_channel.invite,
-    stock.stock,
-    twitter.twitter,
-    weather.weather,
-)
+import bonkbot.launcher
 
-INIT_PLUGINS = (
-    karma.load,
-)
+if __name__ == '__main__':
+    sys.exit(bonkbot.launcher.launch())

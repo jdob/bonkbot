@@ -7,7 +7,12 @@
 # along with this software; if not, see
 # http://www.gnu.org/licenses/old-licenses/gpl-2.0.txt.
 
-from decorators import command, admin
+
+from bonkbot.decorators import command, admin
+
+
+def init_plugin(config, irc_client):
+    return [speak, join, leave]
 
 @command('speak')
 @admin

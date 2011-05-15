@@ -7,9 +7,10 @@
 # along with this software; if not, see
 # http://www.gnu.org/licenses/old-licenses/gpl-2.0.txt.
 
-from decorators import command
+from bonkbot.decorators import command
 from xml.dom import minidom
 import urllib
+
 
 WEATHER_URL = 'http://xml.weather.yahoo.com/forecastrss?p=%s'
 WEATHER_NS = 'http://xml.weather.yahoo.com/ns/rss/1.0'
@@ -17,6 +18,10 @@ WEATHER_NS = 'http://xml.weather.yahoo.com/ns/rss/1.0'
 WEATHER_FORMAT = 'Yahoo! Weather for %s, %s'
 CURRENT_FORMAT = 'Current -> Temp: %sF, Condition: %s'
 FORECAST_FORMAT = '%s -> Low: %sF, High: %sF, Condition: %s'
+
+
+def init_plugin(config, irc_client):
+    return [weather]
 
 @command('weather')
 def weather(message):
