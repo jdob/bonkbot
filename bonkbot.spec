@@ -50,7 +50,7 @@ mkdir -p %{buildroot}/etc/bonkbot
 cp etc/bonkbot/bonk.conf %{buildroot}/etc/bonkbot/
 
 mkdir -p %{buildroot}/etc/bonkbot/conf.d
-cp etc/bonkbot/conf.d %{buildroot}/etc/bonkbot/conf.d/
+cp etc/bonkbot/conf.d/* %{buildroot}/etc/bonkbot/conf.d/
 
 mkdir -p %{buildroot}/etc/bonkbot/plugins
 cp src/plugins/* %{buildroot}/etc/bonkbot/plugins/
