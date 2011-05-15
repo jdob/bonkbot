@@ -18,5 +18,5 @@ def give(message):
     new_op = message.author()
 
     # Don't try to op yourself
-    if new_op != message.config['nick']:
+    if new_op != message.config.get('bot', 'nick'):
         message.irc_client.give_ops(message.channel()[1:], message.author())
