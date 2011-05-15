@@ -134,9 +134,9 @@ class BonkBot:
             message = BonkMessage(self.irc_client, self.config, data)
             for l in self.listeners:
                 try:
-                    thread.start_new_thread(l, (message,))
+                    thread.start_new_thread(self._notify_listener, (l, message))
                 except Exception:
-                    LOG.exception('Error from listener [%s]' % l.__name__)
+                    LOG.exception('Error launching thread to handle listener [%s]' % l.__name__)
 
             if message.command('help'):
                 message.reply('Greetings traveler. Commands are triggered by typing !, then my name, then the command and any arguments it may have.')
@@ -157,3 +157,9 @@ class BonkBot:
     def startd(self):
         self.connect()
         thread.start_new_thread(self.run, ())
+
+    def _notify_listener(self, listener_func, message):
+        try:
+            listener_func(message)
+        except Exception:
+            LOG.exception('Error from listener [%s]' % listener_func.__name__)

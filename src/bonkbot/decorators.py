@@ -21,6 +21,7 @@ class command:
             if message.command(self.name):
                 f(*args)
         wrapped.__doc__ = f.__doc__
+        wrapped.__name__ = f.__name__
         return wrapped
 
 class join:
@@ -32,6 +33,7 @@ class join:
     def __init__(self, f):
         self.f = f
         self.__doc__ = f.__doc__
+        self.__name__ = f.__name__
 
     def __call__(self, *args):
         message = args[0]
@@ -46,6 +48,7 @@ class admin:
     def __init__(self, f):
         self.f = f
         self.__doc__ = f.__doc__
+        self.__name__ = f.__name__
 
     def __call__(self, *args):
         message = args[0]
