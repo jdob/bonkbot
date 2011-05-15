@@ -9,6 +9,8 @@
 
 import socket
 
+# -- classes ------------------------------------------------------------------
+
 class IRCClient(object):
     '''
     Represents a connection to an IRC server. Once connected, commands issued

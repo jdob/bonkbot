@@ -7,15 +7,16 @@
 # along with this software; if not, see
 # http://www.gnu.org/licenses/old-licenses/gpl-2.0.txt.
 
-
 from ConfigParser import SafeConfigParser
 import imp
 import logging
 import os
 
+# -- constants ----------------------------------------------------------------
 
 LOG = logging.getLogger(__name__)
 
+# -- loaders ------------------------------------------------------------------
 
 class InstalledPluginLoader:
 

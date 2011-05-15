@@ -11,9 +11,11 @@ import logging
 import irc
 import thread
 
+# -- constants ----------------------------------------------------------------
 
 LOG = logging.getLogger(__name__)
 
+# -- classes ------------------------------------------------------------------
 
 class BonkMessage:
     '''
@@ -80,6 +82,7 @@ class BonkMessage:
                 return True
         else:
             return False
+
 
 class BonkBot:
     '''

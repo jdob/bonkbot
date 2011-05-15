@@ -14,12 +14,14 @@ import logging
 from optparse import OptionParser
 import os
 
+# -- constants ----------------------------------------------------------------
 
 DEFAULT_CONF_FILE = '/etc/bonkbot/bonk.conf'
 
 USER_LOG_DIR = '~/.bonkbot'
 USER_LOG_FILE = 'bonkbot.log'
 
+# -- startup ------------------------------------------------------------------
 
 def load_configuration(filename):
     config = SafeConfigParser()
