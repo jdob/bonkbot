@@ -49,6 +49,8 @@ def configure_logging(log_dir=None, debug=False):
         logger.setLevel(logging.INFO)
 
 def launch():
+
+    # Command line options
     parser = OptionParser()
     parser.add_option('-v', dest='debug', action='store_true', default='True',
                       help='write verbose information to the logs')
@@ -57,11 +59,19 @@ def launch():
 
     options, args = parser.parse_args()
 
+    # Configuration
     config = load_configuration(options.config_file)
-    configure_logging(debug=options.debug)
+
+    # Logging
+    log_dir = None
+    if config.has_option('bot', 'log_dir'): log_dir = config.get('bot', 'log_dir')
+    configure_logging(log_dir=log_dir, debug=options.debug)
+
+    # Bot Creation
     loader = InstalledPluginLoader(options.config_file, config.get('plugins', 'conf_dir'), config.get('plugins', 'module_dir'))
     bonkbot = bot.BonkBot(config, loader)
 
+    # Run
     bonkbot.start()
 
 if __name__ == '__main__':
