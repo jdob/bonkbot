@@ -69,8 +69,9 @@ rm -rf $RPM_BUILD_ROOT
 %{python_sitelib}/bonkbot/*
 %{python_sitelib}/bonkbot*.egg-info
 %config(noreplace) /etc/bonkbot/bonk.conf
-/etc/bonkbot/plugins/*
-/etc/bonkbot/conf.d/*
+%{_sysconfdir}/bonkbot/plugins/*
+%{_sysconfdir}/bonkbot/conf.d/*
+%{_bindir}/bonkbot
 
 
 # -- changelog -------------------------------------------------------------------
