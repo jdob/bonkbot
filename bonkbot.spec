@@ -3,7 +3,7 @@
 # -- header -----------------------------------------------------------------------
 
 Name:		    bonkbot
-Version:        1.0.1
+Version:        1.0.2
 Release:	    1%{?dist}
 Summary:	    Python IRC chat bot
 
@@ -76,6 +76,9 @@ rm -rf $RPM_BUILD_ROOT
 # -- changelog -------------------------------------------------------------------
 
 %changelog
+* Sun May 15 2011 Jay Dobies <jason.dobies@redhat.com> 1.0.2-1
+- Need to copy conf.d files, not the dir itself (jason.dobies@redhat.com)
+
 * Sun May 15 2011 Jay Dobies <jason.dobies@redhat.com> 1.0.1-1
 - new package built with tito
 
