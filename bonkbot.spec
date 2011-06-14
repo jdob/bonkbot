@@ -3,7 +3,7 @@
 # -- header -----------------------------------------------------------------------
 
 Name:		    bonkbot
-Version:        1.0.3
+Version:        1.0.4
 Release:	    1%{?dist}
 Summary:	    Python IRC chat bot
 
@@ -77,6 +77,14 @@ rm -rf $RPM_BUILD_ROOT
 # -- changelog -------------------------------------------------------------------
 
 %changelog
+* Tue Jun 14 2011 Jay Dobies <jason.dobies@redhat.com> 1.0.4-1
+- Minor code formatting cleanups (jason.dobies@redhat.com)
+- Fixed decorators to store the wrapped function name for logging purposes
+  (jason.dobies@redhat.com)
+- Fixed config lookup (jason.dobies@redhat.com)
+- Added overridable log file location (jason.dobies@redhat.com)
+- Fixes to karma plugin (jason.dobies@redhat.com)
+
 * Sun May 15 2011 Jay Dobies <jason.dobies@redhat.com> 1.0.3-1
 - Missed binary in the files list (jason.dobies@redhat.com)
 
