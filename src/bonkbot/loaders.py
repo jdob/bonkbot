@@ -46,6 +46,7 @@ class InstalledPluginLoader:
 
             if not plugin_conf.getboolean('plugin', 'enabled'):
                 LOG.info('Skipping disabled plugin [%s]' % plugin_name)
+                continue
 
             try:
                 plugin_module = self._load_module(plugin_name)
