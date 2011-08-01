@@ -129,7 +129,12 @@ class BonkBot:
     def run(self):
         running = True
         while running:
-            data = self.irc_client.receive()
+            data = None
+            try:
+                data = self.irc_client.receive()
+            except KeyboardInterrupt:
+                self.irc_client.quit('Being kicked out now...')
+                break
 
             if data.find('PING') != -1:
                 self.irc_client.raw('PONG ' + data.split()[1] + '\r\n')
