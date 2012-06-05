@@ -22,7 +22,7 @@ def speak(message):
     speak_args = cmd_args[1:]
     say_this = ' '.join(speak_args)
 
-    message.irc_client.senf(channel, say_this)
+    message.irc_client.send(channel, say_this)
 
 @command('join')
 @admin
