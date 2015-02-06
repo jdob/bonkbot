@@ -7,28 +7,31 @@
 # along with this software; if not, see
 # http://www.gnu.org/licenses/old-licenses/gpl-2.0.txt.
 
-from bonkbot.decorators import command
 import urllib
+
+from bonkbot.bot.decorators import command
 
 
 def init_plugin(config, irc_client):
     return [stock]
 
+
 @command('stock')
 def stock(message):
-    '''quote [symbol] - Display information for the stock [symbol].'''
+    """quote [symbol] - Display information for the stock [symbol]."""
 
     args = message.data.split()
 
     if len(args) > args.index('stock') + 1:
         symbol = args[args.index('stock') + 1]
 
-        price = __lookup(symbol, 'l1')
-        change = __lookup(symbol, 'c1')
+        price = _lookup(symbol, 'l1')
+        change = _lookup(symbol, 'c1')
 
         message.reply(symbol + ' - Price: $' + price + ', Change: $' + change)
 
-def __lookup(symbol, f):
+
+def _lookup(symbol, f):
     url = 'http://finance.yahoo.com/d/quotes.csv?s=%s&f=%s' % (symbol, f)
     value = urllib.urlopen(url).read().strip().strip('"')
     return value

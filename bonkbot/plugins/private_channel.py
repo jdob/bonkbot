@@ -7,15 +7,16 @@
 # along with this software; if not, see
 # http://www.gnu.org/licenses/old-licenses/gpl-2.0.txt.
 
-from bonkbot.decorators import command
+from bonkbot.bot.decorators import command
 
 
 def init_plugin(config, irc_client):
     return [invite]
 
+
 @command('invite')
 def invite(message):
-    '''invite [channel_name] [user] [user] ...'''
+    """invite [channel_name] [user] [user] ..."""
 
     args = message.command_args('invite')
 

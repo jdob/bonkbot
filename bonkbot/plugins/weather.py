@@ -7,9 +7,10 @@
 # along with this software; if not, see
 # http://www.gnu.org/licenses/old-licenses/gpl-2.0.txt.
 
-from bonkbot.decorators import command
 from xml.dom import minidom
 import urllib
+
+from bonkbot.bot.decorators import command
 
 
 WEATHER_URL = 'http://xml.weather.yahoo.com/forecastrss?p=%s'
@@ -23,19 +24,21 @@ FORECAST_FORMAT = '%s -> Low: %sF, High: %sF, Condition: %s'
 def init_plugin(config, irc_client):
     return [weather]
 
+
 @command('weather')
 def weather(message):
-    '''weather [zip] - Display weather information for [zip].'''
+    """weather [zip] - Display weather information for [zip]."""
 
     args = message.command_args('weather')
 
     if len(args) > 0:
         zip_code = args[0]
-        msgs = __weather_as_strings(zip_code)
+        msgs = _weather_as_strings(zip_code)
         for m in msgs:
             message.reply(m)
 
-def __weather_as_strings(zip_code):
+
+def _weather_as_strings(zip_code):
     url = WEATHER_URL % zip_code
     dom = minidom.parse(urllib.urlopen(url))
     
@@ -53,6 +56,3 @@ def __weather_as_strings(zip_code):
         weather.append(forecast)
         
     return weather
-
-if __name__ == '__main__':
-    print(weatherAsString('08056'))

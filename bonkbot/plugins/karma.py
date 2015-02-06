@@ -11,10 +11,12 @@ import pickle
 import re
 import os
 
+
 VALID_NAME = r'^([A-Za-z0-9_-]|\[|\])*$'
 
 CONFIG = None
 KARMA = {}
+
 
 def init_plugin(config, irc_client):
     global CONFIG
@@ -29,27 +31,31 @@ def init_plugin(config, irc_client):
 
     return [karma]
 
+
 def karma(message):
-    '''karma - Display all karma data known to the bot.'''
+    """karma - Display all karma data known to the bot."""
 
     if message.data.find('++') != -1:
-        __add(message)
+        _add(message)
 
     if message.data.find('--') != -1:
-        __remove(message)
+        _remove(message)
 
     if message.command('karma'):
-        __list(message)
+        _list(message)
 
-    __save(CONFIG.get('plugin', 'karma_file'))
+    _save(CONFIG.get('plugin', 'karma_file'))
 
-def __add(message):
-    __assign_karma(message, '++', 1)
 
-def __remove(message):
-    __assign_karma(message, '--', -1)
+def _add(message):
+    _assign_karma(message, '++', 1)
 
-def __assign_karma(message, flag, step):
+
+def _remove(message):
+    _assign_karma(message, '--', -1)
+
+
+def _assign_karma(message, flag, step):
     for s in message.data.split():
         if not s.endswith(flag):
             continue
@@ -68,20 +74,23 @@ def __assign_karma(message, flag, step):
         else:
             KARMA[name] = step
 
-        __print_karma(message, name)
+        _print_karma(message, name)
 
-def __list(message):
+
+def _list(message):
     if len(KARMA) == 0:
         message.reply('I don\'t have any karma listings, you should add some.')
         return
 
     for user in KARMA:
-        __print_karma(message, user)
+        _print_karma(message, user)
 
-def __save(filename):
-    file = open(filename, 'wb')
-    pickle.dump(KARMA, file)
-    file.close()
 
-def __print_karma(message, user):
+def _save(filename):
+    f = open(filename, 'wb')
+    pickle.dump(KARMA, f)
+    f.close()
+
+
+def _print_karma(message, user):
     message.reply(user + ': ' + str(KARMA[user]))

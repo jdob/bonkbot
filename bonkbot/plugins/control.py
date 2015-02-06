@@ -8,11 +8,12 @@
 # http://www.gnu.org/licenses/old-licenses/gpl-2.0.txt.
 
 
-from bonkbot.decorators import command, admin
+from bonkbot.bot.decorators import command, admin
 
 
 def init_plugin(config, irc_client):
     return [speak, join, leave]
+
 
 @command('speak')
 @admin
@@ -24,12 +25,14 @@ def speak(message):
 
     message.irc_client.send(channel, say_this)
 
+
 @command('join')
 @admin
 def join(message):
     cmd_args = message.command_args('join')
     channel = cmd_args[0]
     message.irc_client.join(channel)
+
 
 @command('leave')
 @admin

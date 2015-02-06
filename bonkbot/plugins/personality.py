@@ -7,8 +7,10 @@
 # along with this software; if not, see
 # http://www.gnu.org/licenses/old-licenses/gpl-2.0.txt.
 
-from bonkbot.decorators import command
 import random
+
+from bonkbot.bot.decorators import command
+
 
 INSULTS = (
 'Noob.',
@@ -41,6 +43,7 @@ COMPLIMENTS = (
 def init_plugin(config, irc_client):
     return [insult, compliment]
 
+
 @command('insult')
 def insult(message):
     '''insult [user] - Send a random insult to [user].'''
@@ -59,15 +62,18 @@ def insult(message):
         else:
             message.reply(user + ' - ' + __random(INSULTS))
 
+
 def compliment(message):
     if random.randint(0, 1000) == 705:
         msg = __random_sub(COMPLIMENTS, message.author())
         message.reply(msg)
 
-def __random(list):
-    index = random.randint(0, len(list) - 1)
-    return list[index]
 
-def __random_sub(list, sub):
-    index = random.randint(0, len(list) - 1)
-    return list[index] % sub
+def __random(comments):
+    index = random.randint(0, len(comments) - 1)
+    return comments[index]
+
+
+def __random_sub(comments, sub):
+    index = random.randint(0, len(comments) - 1)
+    return comments[index] % sub
