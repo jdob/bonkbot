@@ -12,11 +12,9 @@ import imp
 import logging
 import os
 
-# -- constants ----------------------------------------------------------------
 
 LOG = logging.getLogger(__name__)
 
-# -- loaders ------------------------------------------------------------------
 
 class InstalledPluginLoader:
 
@@ -24,7 +22,6 @@ class InstalledPluginLoader:
         self.bot_config_filename = bot_config_filename
         self.conf_dir = conf_dir
         self.plugin_dir = plugin_dir
-
 
     def load(self, irc_client):
 

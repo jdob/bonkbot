@@ -7,12 +7,11 @@
 # along with this software; if not, see
 # http://www.gnu.org/licenses/old-licenses/gpl-2.0.txt.
 
-# -- decorators ---------------------------------------------------------------
 
 class command:
-    '''
+    """
     Runs the function if the given command was indicated to the bot.
-    '''
+    """
 
     def __init__(self, name):
         self.name = name
@@ -26,11 +25,12 @@ class command:
         wrapped.__name__ = f.__name__
         return wrapped
 
+
 class join:
-    '''
+    """
     Runs the function if the command represents a user joining a channel in which
     the bot exists.
-    '''
+    """
 
     def __init__(self, f):
         self.f = f
@@ -41,11 +41,12 @@ class join:
         message = args[0]
         if message.is_join():
             self.f(*args)
-        
+
+
 class admin:
-    '''
+    """
     Runs the function only if the author giving the command is registered as an admin.
-    '''
+    """
 
     def __init__(self, f):
         self.f = f

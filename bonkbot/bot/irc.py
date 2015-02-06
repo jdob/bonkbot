@@ -9,13 +9,12 @@
 
 import socket
 
-# -- classes ------------------------------------------------------------------
 
 class IRCClient(object):
-    '''
+    """
     Represents a connection to an IRC server. Once connected, commands issued
     to instances of this class will be sent to the IRC server.
-    '''
+    """
 
     def __init__(self):
         self.socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)

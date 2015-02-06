@@ -7,26 +7,26 @@
 # along with this software; if not, see
 # http://www.gnu.org/licenses/old-licenses/gpl-2.0.txt.
 
-import bot
 from ConfigParser import SafeConfigParser
 from loaders import InstalledPluginLoader
 import logging
 from optparse import OptionParser
 import os
 
-# -- constants ----------------------------------------------------------------
+import bot
+
 
 DEFAULT_CONF_FILE = '/etc/bonkbot/bonk.conf'
 
 USER_LOG_DIR = '~/.bonkbot'
 USER_LOG_FILE = 'bonkbot.log'
 
-# -- startup ------------------------------------------------------------------
 
 def load_configuration(filename):
     config = SafeConfigParser()
     config.read(filename)
     return config
+
 
 def configure_logging(log_dir=None, debug=False):
 
@@ -49,6 +49,7 @@ def configure_logging(log_dir=None, debug=False):
         logger.setLevel(logging.DEBUG)
     else:
         logger.setLevel(logging.INFO)
+
 
 def launch():
 
@@ -75,6 +76,7 @@ def launch():
 
     # Run
     bonkbot.start()
+
 
 if __name__ == '__main__':
     launch()

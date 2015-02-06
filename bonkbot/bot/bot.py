@@ -11,17 +11,15 @@ import logging
 import irc
 import thread
 
-# -- constants ----------------------------------------------------------------
 
 LOG = logging.getLogger(__name__)
 
-# -- classes ------------------------------------------------------------------
 
 class BonkMessage:
-    '''
+    """
     Represents an inbound message to the bot; each instance of this class is
     a new message. Utility methods are provided for handling the message.
-    '''
+    """
 
     def __init__(self, irc_client, config, data):
         self.irc_client = irc_client
@@ -29,31 +27,31 @@ class BonkMessage:
         self.data = data
 
     def command(self, cmd):
-        '''
+        """
         Returns True if this message represents the specified command sent to the bot.
-        '''
+        """
         return self.data.find('!%s %s' % (self.config.get('bot', 'nick'), cmd)) != -1
 
     def is_join(self):
-        '''
+        """
         Returns True if this message represents a user joining a channel in which the
         bot is; False otherwise.
-        '''
+        """
         return self.data.find('JOIN') != -1
 
     def command_args(self, cmd):
-        '''
+        """
         Parses out and returns the arguments to the given command.
-        '''
+        """
         args = self.data.split()
         cmd_args = args[args.index(cmd) + 1:]
         return cmd_args
 
     def reply(self, message):
-        '''
+        """
         Sends the given message back to the originator (either the author in the case a
         private message was sent to the bot or the channel on which it was received).
-        '''
+        """
         destination = self.channel()
         if destination == self.config.get('bot', 'nick'):
             destination = self.author()
@@ -61,21 +59,21 @@ class BonkMessage:
         self.irc_client.send(destination, message)
 
     def channel(self):
-        '''
+        """
         Returns the channel on which the message was received.
-        '''
+        """
         return self.data.split()[2]
 
     def author(self):
-        '''
+        """
         Returns the author of the received message.
-        '''
+        """
         return self.data[1 : self.data.index('!')]
 
     def admin(self):
-        '''
+        """
         Returns True if the author of the received message is an admin; False otherwise.
-        '''
+        """
         author = self.author()
         for admin in self.config.get('bot', 'admins').split(','):
             if admin == author:
@@ -85,11 +83,11 @@ class BonkMessage:
 
 
 class BonkBot:
-    '''
+    """
     Represents an instance of the bot. The configuration specified at instantiation
     is used to drive basic bot behavior such as IRC server location, bot nickname,
     and location of plugin files.
-    '''
+    """
 
     def __init__(self, config, plugin_loader):
         self.config = config
