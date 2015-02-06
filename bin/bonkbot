@@ -10,7 +10,7 @@
 
 import sys
 
-import bonkbot.launcher
+import bonkbot.bot.launcher
 
 if __name__ == '__main__':
-    sys.exit(bonkbot.launcher.launch())
+    sys.exit(bonkbot.bot.launcher.launch())
