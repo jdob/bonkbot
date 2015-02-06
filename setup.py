@@ -7,14 +7,14 @@
 # along with this software; if not, see
 # http://www.gnu.org/licenses/old-licenses/gpl-2.0.txt.
 
-from setuptools import setup
+from setuptools import setup, find_packages
 
 setup(
-        name='bonkbot',
-        version='1.0.0',
-        packages=['bonkbot'],
-        scripts=['../bin/bonkbot'],
+    name='bonkbot',
+    version='1.0.0',
 
-        author='Jay Dobies',
-        author_email='jdobies@gmail.com',
+    author='Jay Dobies',
+    author_email='jdobies@gmail.com',
+
+    packages=find_packages(),
 )
